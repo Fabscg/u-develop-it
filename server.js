@@ -1,3 +1,5 @@
+
+const mysql = require('mysql2')
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -6,6 +8,43 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//Connect database
+const db = mysql.createConnection(
+    {
+        host:'localhost',
+        user:'root',
+        password: 'root',
+        database: 'election'
+    },
+    console.log('Connected to the election database.')
+);
+
+db.query(`SELECT * FROM candidate`, (err, rows) => {
+    console.log(rows);
+})
+db.query(`SELECT * FROM candidates WHERE id = 1`, (err, row) => {
+    if(err){
+        console.log(err);
+    }
+    console.log(row);
+})
+// Delete a candidate
+// db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, result) => {
+//     if(err) {
+//         console.log(err);
+//     }
+//     console.log(result);
+// })
+const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected) 
+              VALUES (?,?,?,?)`;
+const params = [1, 'Ronald', 'Firbank', 1];
+
+db.query(sql, params, (err, result) => {
+  if (err) {
+    console.log(err);
+  }
+  console.log(result);
+});
 
 //This is a catchall route, its placement is very important. It needs to be the last one
 app.get('/', (req, res) => {
