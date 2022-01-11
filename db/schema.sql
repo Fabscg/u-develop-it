@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS parties;
 
 CREATE TABLE parties (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    party_name VARCHAR(100) NOT NULL,
     description TEXT
 );
 
