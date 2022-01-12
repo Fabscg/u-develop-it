@@ -12,7 +12,7 @@ CREATE TABLE voters (
 
 CREATE TABLE parties (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    party_name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     description TEXT
 );
 
